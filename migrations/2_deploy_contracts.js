@@ -7,7 +7,7 @@ module.exports = async (deployer, network, accounts) => {
   await deployer.deploy(DaiToken)
   const daiToken = await DaiToken.deployed()
 
-  //Depoloy DappToken
+  //Depoloy DappToken 
   await deployer.deploy(DappToken)
   const dappToken = await DappToken.deployed()
 
@@ -16,7 +16,7 @@ module.exports = async (deployer, network, accounts) => {
   const tokenFarm = await TokenFarm.deployed()
 
   //Transfer all tokens to TokenFarm (1M)
-  1000000000000000000000000
+
   await dappToken.transfer(tokenFarm.address, '1000000000000000000000000')
 
   // Trasnfer 100 mock DAI tokens to investor
