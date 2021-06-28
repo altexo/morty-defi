@@ -1,0 +1,15 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+       /* The image used */
+       /* background-image: url('/src/static/rick-n-morty-background.png') ; */
+
+       /* Full height */
+       /* height: 100%;  */
+   
+       /* Center and scale the image nicely */
+       background-image: url('./static/rick-n-morty-background.png') ;
+}

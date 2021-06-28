@@ -5,6 +5,8 @@ import TokenFarm from '../abis/TokenFarm.json'
 import Web3 from 'web3'
 import Navbar from './Navbar'
 import './App.css'
+import Main from './Main'
+
 
 class App extends Component {
 
@@ -45,7 +47,7 @@ class App extends Component {
 
       let dappTokenBalance = await dappToken.methods.balanceOf(this.state.account).call()
       this.setState({ dappTokenBalance: dappTokenBalance.toString()})
-      console.log('dapptoken balance: ',this.state.daiTokenBalance)
+      console.log('dapptoken balance: ', this.state.dappTokenBalance)
      
     }else {
       window.alert('DappToken contract not deployed to detected network.')
@@ -84,6 +86,22 @@ class App extends Component {
     })
   }
 
+  stakeTokens = amount => {
+    this.setState({ loading: true })
+    this.state.daiToken.methods.approve( this.state.tokenFarm._address, amount ).send( { from : this.state.account } ).on('transactionHash', (hash) => {
+      this.state.tokenFarm.methods.stakeTokens( amount ).send( { from: this.state.account } ).on('transactionHash', (hash) => {
+        this.setState( { loading: false } )
+      })
+    })
+  }
+
+  unstakeTokens = amount => {
+    this.setState({ loading: true })
+      this.state.tokenFarm.methods.unstakeTokens().send( { from: this.state.account } ).on('transactionHash', (hash) => {
+        this.setState( { loading: false } )
+    })
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -99,6 +117,18 @@ class App extends Component {
   }
 
   render() {
+    let content 
+    if (!this.state.loading){
+      content = <Main
+        daiTokenBalance={this.state.daiTokenBalance}
+        dappTokenBalance={this.state.dappTokenBalance}
+        stakingBalance={this.state.stakingBalance}
+        stakeTokens={this.stakeTokens}
+        unstakeTokens={this.unstakeTokens}
+      />
+    } else {
+      content = "Loading.."
+    }
     return (
       <div>
         <Navbar account={this.state.account} />
@@ -112,9 +142,7 @@ class App extends Component {
                   rel="noopener noreferrer"
                 >
                 </a>
-
-                <h1>Hello, World!</h1>
-
+                { content }
               </div>
             </main>
           </div>

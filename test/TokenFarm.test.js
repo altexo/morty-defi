@@ -38,11 +38,11 @@ contract('TokenFarm', ([owner,investor]) => {
         })
     })
 
-    describe('Dapp Token deployment', async () =>{
+    describe('MORTY Token deployment', async () =>{
         it('has a name', async ()=>{
             
             const name = await dappToken.name()
-            assert.equal(name, 'DApp Token')
+            assert.equal(name, 'MORTY TOKEN')
         })
     })
 
