@@ -1,3 +1,3 @@
 # Morty DeFi
 
-Simple Dapp to buy the DeFi crypto: *Mortycoin (MTY)*.
+Simple Dapp to stake DAI tokens and farm the DeFi crypto: *Mortycoin (MTY)*.
